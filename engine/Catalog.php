@@ -13,6 +13,7 @@ class Catalog
 		{
 			self::$app = new self();
 			self::$app->services['settings'] = $config;
+			self::$app->services['httpHeader'] = new HttpHeader();
 			
 		}
 		return self::$app;
