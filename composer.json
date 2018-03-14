@@ -1,0 +1,18 @@
+{
+    "name": "root/catalog-site.ru",
+    "authors": [
+        {
+            "name": "Roma Malikov",
+            "email": "roma.dev.05@yandex.ru"
+        }
+    ],
+    "require": {},
+    "autoload" : {
+    	"psr-4" : {
+    		"Backend\\"  : "backend",
+    		"Frontend\\" : "frontend",
+    		"Engine\\"   : "engine"
+
+    	}
+    }
+}
