@@ -1,8 +1,6 @@
 <?php
 namespace Engine;
 
-use Frontend\controllers;
-
 class Catalog
 {
 	static $app = null;
@@ -24,7 +22,19 @@ class Catalog
 	
 	public function __set($name, $value) 
 	{
-
+		// если происходит попытка установить значение в массив settings
+		// пример Catalog::$app->settings = ['name', 'value']
+		if($name == 'settings')
+		{
+			// проверяем что это правильный массив
+			if( !is_array($value) or (count($value) != 2) or !isset($value[0]) or !isset($value[1]) )
+			{
+				self::$app->services['httpHeader']->error(500, 'Ошибка в присвоении');
+			}
+			// устанавливаем переменную в массив настроек
+			self::$app->services['settings'][$value[0]] = $value[1];
+		}
+			
 		self::$app->services[$name] = $value;
 	}
 
@@ -37,8 +47,7 @@ class Catalog
 	
 	public function goAction()
 	{
-		$controller = '\\Frontend\\controllers\\' . self::$app->services['request']->controller;
-		
+		$controller = self::$app->services['settings']['controllerNamespace'] . self::$app->services['request']->controller;
 		$action = self::$app->services['request']->action;
 		$id = self::$app->services['request']->id;
 		$page = self::$app->services['request']->page;
