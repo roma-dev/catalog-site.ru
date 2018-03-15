@@ -1,7 +1,8 @@
 <?php
 return [
-	'layoutsPath' => 'frontend/views/layouts',
-	'layoutView' => 'DefaultLayout',
-	'viewsPath' => 'frontend/views/default',
-	'pagination_limit' => 10,
+	'layoutsPath' => 'backend/views/layouts',
+	'layoutView' => 'AdminLayout',
+	'viewsPath' => 'backend/views/default',
+	'controllerNamespace' => '\\Backend\\controllers\\',
+	'pagination_limit' => 5,
 ];
