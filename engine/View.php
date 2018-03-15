@@ -18,8 +18,30 @@ class View {
 		
 		try{
 			
-			// получаем содержимое вида
-			$content = $this->renderView($viewName, $arg);
+			// строим путь до файла вида
+			$viewPath = ROOT_DIR . Catalog::$app->settings['viewsPath'] . '/' . $viewName . '.php';
+
+			// проверяем существуют ли файл вида
+			if( !is_file($viewPath) ){ Catalog::$app->httpHeader->error(500, 'Отсутствует файл вида!'); }
+
+			extract($arg);
+
+			// включаем буферизацию
+			ob_start();
+			ob_implicit_flush(0);
+
+			try{
+				// встраиваем файл вида
+				require $viewPath;
+
+			} catch (Exception $ex) {
+
+				\ob_end_clean();
+				throw $ex;
+			}
+
+			// выводим содержимое вида
+			$content = ob_get_clean();
 			
 			// выводим файл макета
 			require $layoutPath;
