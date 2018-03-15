@@ -13,10 +13,11 @@ class Catalog
 	{
 		if (null === self::$app)
 		{
-			self::$app = new self();
-			self::$app->services['settings'] = $config;
-			self::$app->services['httpHeader'] = new HttpHeader();
-			self::$app->services['rules'] = require_once 'config/rules.php';
+			self::$app							= new self();
+			self::$app->services['settings']	= $config;
+			self::$app->services['httpHeader']	= new HttpHeader();
+			self::$app->services['view']		= new View();
+			self::$app->services['rules']		= require_once 'config/rules.php';
 		}
 		return self::$app;
 	}
@@ -43,7 +44,7 @@ class Catalog
 		$page = self::$app->services['request']->page;
 		
 		// если по какой-то причине не произойдет вызов экшена то отдаем код сервера "Внутренняя ошибка сервера"
-		if (! call_user_func_array( [ new $controller(),  $action], [ $id, $page ]) ) 
+		if ( call_user_func_array( [ new $controller(),  $action], [ $id, $page ]) === false) 
 		{
 			self::$app->httpHeader->error(500);
 		}	
