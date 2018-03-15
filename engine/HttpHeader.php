@@ -4,30 +4,29 @@ namespace Engine;
 
 class HttpHeader {
 	
-	public function e500()
+	private $errorCodes = [
+			'500' => 'Internal Server Error',
+			'403' => 'Forbidden',
+			'404' => 'Not Found',
+			'302' => 'Moved Temporarily',
+			'301' => 'Moved Permanently'
+		];
+	
+	private $redirectCodes = [
+			'302' => 'Moved Temporarily',
+			'301' => 'Moved Permanently'
+		];
+
+
+	public function error($code, $message='')
 	{
-		header('HTTP/1.1 500 Internal Server Error');
+		header( $_SERVER['SERVER_PROTOCOL'] . ' ' . $code . ' ' . $this->errorCodes[$code]);
+		die($message);
 	}
 	
-	public function e404()
+	public function redirect($url, $code=301)
 	{
-		header('HTTP/1.1 404 Not Found');
-	}
-	
-	public function e403()
-	{
-		header('HTTP/1.1 403 Forbidden');
-	}
-	
-	public function r302($alias)
-	{
-		header('HTTP/1.1 302 Moved Temporarily');
-		header("Location: " . $alias);
-	}
-	
-	public function r301($alias)
-	{
-		header('HTTP/1.1 301 Moved Permanently');
-		header("Location: " . $alias);
+		header( $_SERVER['SERVER_PROTOCOL'] . ' ' . $code . ' ' . $this->redirectCodes[$code]);
+		header("Location: " . $url);
 	}
 }
