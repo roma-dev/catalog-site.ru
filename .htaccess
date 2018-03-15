@@ -10,8 +10,9 @@ RewriteRule ^admin/js/(.*)$ 	backend/public/js/$1 		[L]
 RewriteRule ^admin 				backend/admin.php [L]
 
 RewriteCond %{REQUEST_URI} !^/(admin)
-RewriteRule ^css/(.*)$	frontend/public/css/$1	[L]
-RewriteRule ^js/(.*)$ 	frontend/public/js/$1 	[L]
+RewriteRule ^css/(.*)$	frontend/public/css/$1			[L]
+RewriteRule ^js/(.*)$ 	frontend/public/js/$1			[L]
+RewriteRule ^fonts/(.*)$ 	frontend/public/fonts/$1 	[L]
 RewriteRule (.*) /frontend/$1
 
 RewriteCond %{REQUEST_FILENAME} !-f
