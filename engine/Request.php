@@ -11,7 +11,7 @@ class Request {
 	
 	public function __construct() 
 	{
-		if (! $this->checkPath()) { Catalog::$app->httpHeader->error('404'); }
+		if (! $this->checkPath()) { Catalog::$app->httpHeader->error('404', 'Такой страницы не существует!'); }
 		
 		$this->controller = Catalog::$app->rules[ $this->getPath() ]['controller'];
 		$this->action = Catalog::$app->rules[ $this->getPath() ]['action'];
@@ -32,7 +32,7 @@ class Request {
 
 	/**
 	 * 
-	 * @return bool
+	 * @return bool Проверяет на наличие адреса в массиве rules
 	 */
 	
 	private function checkPath()
