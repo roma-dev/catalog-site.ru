@@ -33,6 +33,8 @@ class Catalog
 			}
 			// устанавливаем переменную в массив настроек
 			self::$app->services['settings'][$value[0]] = $value[1];
+			
+			return;
 		}
 			
 		self::$app->services[$name] = $value;
