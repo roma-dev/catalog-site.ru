@@ -10,11 +10,16 @@ class MysqlConnect {
 	// объект класса PDO
     protected static $connection;
 
-    public static function connection()
-    {
-        return static::$connection;
-    }
+//    public static function connection()
+//    {
+//        return static::$connection;
+//    }
 	
+	public function __get($name) {
+		return static::$connection;
+	}
+
+
 	public function __construct($config)
 	{
 		$user = $config['user'];
@@ -26,12 +31,15 @@ class MysqlConnect {
 				. 'dbname='	 . $config['dbname'] . ';'
 				. 'charset=' . $config['charset'];
 				
+		$options    = [
+            PDO::ATTR_PERSISTENT => false,
+            PDO::ATTR_ERRMODE    => PDO::ERRMODE_EXCEPTION
+        ];
 		//'mysql:host=localhost;dbname=test;charset=utf8', $user, $pass
 		try 
 		{
 			// коннектимся к бд
-            $connection = new PDO($dsn, $user, $password);
-			
+            $connection = new PDO($dsn, $user, $password, $options);
         } 
 		catch (PDOException $error) 
 		{
