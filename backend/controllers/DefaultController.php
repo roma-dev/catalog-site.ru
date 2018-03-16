@@ -4,6 +4,7 @@ namespace Backend\controllers;
 
 use Backend\models\User;
 use Engine\Catalog;
+use Engine\AccessControl;
 
 class DefaultController {
 
@@ -14,14 +15,14 @@ class DefaultController {
 
 	public function login()
 	{
+		// если это админ, то не показываем ему форму. редиректим на главную.
+		if( AccessControl::isAdmin() ){ Catalog::$app->httpHeader->redirect('/admin'); }
+		
 		// переназначаем макет для рендеринга страницы логин
 		Catalog::$app->settings = ['layoutView', 'LoginLayout' ];
 		
 		// если нет пост данных рендерим страницу
-		if(!isset($_POST['name']) && !isset($_POST['password'])) 
-		{
-			return Catalog::$app->view->render('login');
-		}
+		if(!isset($_POST['name']) && !isset($_POST['password'])){ return Catalog::$app->view->render('login'); }
 		
 		$user = new User();
 		
@@ -40,7 +41,10 @@ class DefaultController {
 		// проверяем роль посетителя, если у него права админа то логиним его
 		if($user->role == 'admin')
 		{
-			echo 'Данные верны! Вы попали в админку'; die;
+			// добавляем админа в сессии
+			AccessControl::loginAdmin();
+			// редиректим на главную страницу админки
+			Catalog::$app->httpHeader->redirect('/admin');
 		}
 		
 		// если у пользователя нет прав админа то рендерим с выводом ошибки
@@ -49,7 +53,7 @@ class DefaultController {
 
 	public function logout()
 	{
-		return Catalog::$app->view->render('logout', ['id'=> $id, 'page' => $page]);
+		AccessControl::logoutAdmin();
 	}
 			
 }
