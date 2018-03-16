@@ -65,6 +65,18 @@ class sqlBuilder {
 		return self::$builder;
 	}
 
+//	пример строителя запросов для выборки
+//	
+//	Catalog::$app->db->sqlBuilder()
+//			->select('name')
+//			->from('category')
+//			->where('name="категория"')
+//			->orderBy('name DESC')
+//			->forSelect();
+//	
+//	формирует запрос вида 
+//	SELECT name FROM category WHERE name="категория" ORDER BY name DESC
+	
 	// строитель запроса для чтения из бд
 	public function forSelect()
 	{
@@ -189,6 +201,16 @@ class sqlBuilder {
 		return self::$builder;
 	}
 
+//	пример строителя запроса для обновления строк
+//	
+//	Catalog::$app->db->sqlBuilder()
+//			->tableName('category')
+//			->set(['name' => 'Другое название категории', 'active' => '5'])
+//			->where('name="Категория"')
+//			->forUpdate();
+//	
+//	формирует следующий запрос:
+//	UPDATE category SET `name` = "Другое название категории", `active` = "5" WHERE name="Категория"
 
 	public function forUpdate()
 	{
@@ -207,6 +229,16 @@ class sqlBuilder {
 
 // ----------------------------------------------
 
+//	пример построения запроса для удаления
+//	
+//	Catalog::$app->db->sqlBuilder()
+//			->from('category')
+//			->where('name="hedldsdvlo"')
+//			->forDelete();
+//	
+//	формирует строку:
+//	DELETE FROM category WHERE name="hedldsdvlo"	
+	
 	public function forDelete()
 	{
 		if( !$this->from )		{ return false; }
