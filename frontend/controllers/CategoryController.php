@@ -8,6 +8,6 @@ class CategoryController {
 	
 	public function index($id, $page)
 	{
-		echo Catalog::$app->view->render('category', ['id'=> $id, 'page' => $page]);
+		return Catalog::$app->view->render('category', ['id'=> $id, 'page' => $page]);
 	}
 }

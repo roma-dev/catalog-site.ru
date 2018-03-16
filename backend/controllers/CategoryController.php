@@ -16,22 +16,22 @@ class CategoryController {
 
 	public function categories($id, $page)
 	{
-		echo Catalog::$app->view->render('categories', ['id'=> $id, 'page' => $page]);
+		return Catalog::$app->view->render('categories', ['id'=> $id, 'page' => $page]);
 	}
 	
 	public function view($id, $page)
 	{
-		echo Catalog::$app->view->render('view', ['id'=> $id, 'page' => $page]);
+		return Catalog::$app->view->render('view', ['id'=> $id, 'page' => $page]);
 	}
 	
 	public function update($id, $page)
 	{
-		echo Catalog::$app->view->render('update', ['id'=> $id, 'page' => $page]);
+		return Catalog::$app->view->render('update', ['id'=> $id, 'page' => $page]);
 	}
 	
 	public function create($id, $page)
 	{
-		echo Catalog::$app->view->render('create', ['id'=> $id, 'page' => $page]);
+		return Catalog::$app->view->render('create', ['id'=> $id, 'page' => $page]);
 	}
 	
 }

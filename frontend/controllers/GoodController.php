@@ -8,6 +8,6 @@ class GoodController {
 	
 	public function index($id, $page)
 	{
-		echo Catalog::$app->view->render('good', ['id'=> $id, 'page' => $page]);
+		return Catalog::$app->view->render('good', ['id'=> $id, 'page' => $page]);
 	}
 }
