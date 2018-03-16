@@ -1,8 +1,9 @@
 <?php
 return [
-	'host' => '127.0.0.1',
-	'dbname' => 'catalog-site',
-	'username' => 'root',
-	'password' => '',
-	'charset' => 'utf8'
+	'driver'	=> 'mysql',
+	'host'		=> '127.0.0.1',
+	'dbname'	=> 'catalog-site',
+	'user'		=> 'root',
+	'password'	=> '',
+	'charset'	=> 'utf8'
 ];
