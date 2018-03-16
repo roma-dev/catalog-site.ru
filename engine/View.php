@@ -53,7 +53,7 @@ class View {
 		}
 		
 		// отдаем содержимое макета
-		return ob_get_clean();
+		echo ob_get_clean();
 		
 	}
 	
