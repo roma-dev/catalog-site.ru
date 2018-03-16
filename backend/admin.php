@@ -1,4 +1,8 @@
 <?php
+session_start();
+
+ini_set('display_errors',1);
+error_reporting(E_ALL);
 
 use Engine\Catalog;
 use Engine\Request;
