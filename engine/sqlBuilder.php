@@ -106,6 +106,28 @@ class sqlBuilder {
 		return self::$builder;
 	}
 
+//	пример построения запроса для вставки
+//	
+//	Catalog::$app->db->sqlBuilder()
+//		->tableName('category')
+//		->columns('id, name, active')
+//		->values('33, категория, 1')
+//		->forInsert();
+//	
+//	или
+//	
+//	Catalog::$app->db->sqlBuilder()
+//		->tableName('category')
+//		->forInsert(
+//			[
+//				'id'		=> '33',
+//				'name'		=> '',
+//				'active'	=> '1'
+//			]);	
+// 
+//	эти конструкции формируют следующий sql запрос
+//	INSERT INTO category (`id`,`name`,`active`) VALUES ("33","категория","1")
+	
 
 	public function forInsert($args = null)
 	{
@@ -134,7 +156,7 @@ class sqlBuilder {
 		
 		foreach ($arrayParams as $param)
 		{
-			$returnString .= $quotes . $param . $quotes . ',';
+			$returnString .= $quotes . trim($param) . $quotes . ',';
 		}
 		
 		return rtrim($returnString, ',');
