@@ -15,7 +15,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $config		= require_once __DIR__. '/config/config.php';
 $rules		= require_once __DIR__. '/config/rules.php';
-$config_db		= require_once __DIR__. '/config/db.php';
+$config_db	= require_once __DIR__. '/config/db.php';
 
 Catalog::init($config);
 

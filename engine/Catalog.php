@@ -11,11 +11,12 @@ class Catalog
 	{
 		if (null === self::$app)
 		{
-			self::$app							= new self();
-			self::$app->services['settings']	= $config;
-			self::$app->services['httpHeader']	= new HttpHeader();
-			self::$app->services['view']		= new View();
-			self::$app->services['rules']		= require_once 'config/rules.php';
+			self::$app								= new self();
+			self::$app->services['settings']		= $config;
+			self::$app->services['httpHeader']		= new HttpHeader();
+			self::$app->services['accessControl']	= new AccessControl();
+			self::$app->services['view']			= new View();
+			self::$app->services['rules']			= require_once 'config/rules.php';
 		}
 		return self::$app;
 	}
