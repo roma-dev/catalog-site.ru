@@ -6,6 +6,8 @@ class sqlBuilder {
 	
 	private static $builder = null;
 	
+	private $sql;
+
 	private $select = '*';
 	private $from;
 	private $where;
@@ -28,6 +30,13 @@ class sqlBuilder {
 		}
 		return self::$builder;
 	}
+	
+	public function sql($param='')
+	{	
+		if($param === null) { $this->sql = null; }
+		return $this->sql;
+	}
+		
 //------------------------------------------------	
 	public function select($string = '*')
 	{
@@ -72,6 +81,8 @@ class sqlBuilder {
 		$this->select = '*';
 		$this->orderBy = 'DESC';
 		$this->from = $this->where = $this->limit = null;
+		
+		$this->sql = $sql;
 		return $sql;
 	}
 
@@ -109,6 +120,7 @@ class sqlBuilder {
 
 		$this->tableName = $this->columns = $this->values = null;
 		
+		$this->sql = $sql;
 		return $sql;
 
 	}
@@ -167,6 +179,7 @@ class sqlBuilder {
 
 		$this->tableName = $this->set = $this->where = null;
 		
+		$this->sql = $sql;		
 		return $sql;
 	}
 
@@ -180,7 +193,8 @@ class sqlBuilder {
 		$sql .= $this->where ? 'WHERE ' . $this->where . ' ' : '';
 
 		$this->from = $this->where = null;
-		
+
+		$this->sql = $sql;		
 		return $sql;
 	}
 	
