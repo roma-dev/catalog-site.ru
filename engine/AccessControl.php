@@ -8,25 +8,25 @@ class AccessControl {
 	{
 		$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 		
-		if(!$this->isAdmin() && $path != '/admin/login' )
+		if(!self::isAdmin() && $path != '/admin/login' )
 		{ 
 			Catalog::$app->httpHeader->redirect('/admin/login', 302); 	
 		}
 	}
 
 
-	public function isAdmin()
+	public static function isAdmin()
 	{
 		if( isset($_SESSION['admin']) ) { return true; }
 		return false;
 	}
 	
-	public function loginAdmin()
+	public static function loginAdmin()
 	{
 		if( !isset($_SESSION['admin']) ) { $_SESSION['admin'] = true; }
 	}
 	
-	public function logout()
+	public static function logoutAdmin()
 	{
 		if (!isset($_SESSION['admin'])) { return; }
 		unset($_SESSION['admin']);
