@@ -10,7 +10,13 @@ class Category {
 	
 	private $searchColumns =  [ 'name', 'short_description', 'active' ];
 			
+	private $counts;
 	
+	public function counts()
+	{
+		return $this->counts;
+	}
+
 	public function selectCategories()
 	{
 		// формирует sql для выборки
@@ -26,6 +32,11 @@ class Category {
 		$result = Catalog::$app->db->select();
 		
 		if(!is_array($result) && empty($result)) return false;
+		
+		$counts = Catalog::$app->db->selectOne(Catalog::$app->db->sqlBuilder()->sqlForCount());
+		
+		// сохраняем количество строк в свойство
+		$this->counts = $counts['rows'];
 		
 		return $result;
 	}
