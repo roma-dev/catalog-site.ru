@@ -65,6 +65,42 @@ class sqlBuilder {
 		return self::$builder;
 	}
 
+// получает ассоциативный массив, может распознать числовые и строковые значения
+// 
+//	Catalog::$app->db->sqlBuilder()
+//		->select('name')
+//		->from('category')
+//		->orWhereParams(['id' => 5, 'name' => '%string%'])
+//		->orderBy('name DESC')
+//		->forSelect();
+//	
+//	создаст строку вида 
+//	SELECT name FROM category WHERE `id` = 5 OR `name` LIKE "%string%" ORDER BY name DESC
+			
+	public function orWhereParams( $args = [])
+	{
+		$returnString = '';
+		
+		foreach ($args as $column => $value)
+		{
+			// если переменная не числовая, то экранируем кавычками
+			if(!is_numeric($value)){ 
+				$returnString .= $value = '`'.$column . '`' . ' LIKE "'. $value . '" OR '; 
+				continue;
+			}
+			
+			$returnString .= '`'.$column . '` = ' . $value . ' OR ' ;
+		}
+		
+		$returnString = rtrim($returnString, ' OR');
+		
+		$this->where = $returnString ? $returnString : '';
+		
+		return self::$builder;
+		
+	}
+
+
 //	пример строителя запросов для выборки
 //	
 //	Catalog::$app->db->sqlBuilder()
