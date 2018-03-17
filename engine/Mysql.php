@@ -43,6 +43,9 @@ class Mysql extends MysqlConnect{
 			// отправляем запрос в бд	
 			$countRows = $this->connection->exec($sql);
 			
+			// получаем id вставленной строки
+			$this->lastId = $this->connection->lastInsertId();
+			
 			// в случае успешного исхода фиксируем транзакцию
 			$this->connection->commit();
 			
