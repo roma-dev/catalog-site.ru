@@ -13,7 +13,7 @@ $pagination = false;
 		</dl>
 
 		<div class="row text-right">
-			<a href="/admin/category/update?<?=$category['id']?>" class="btn btn-success">Редактировать</a>
+			<a href="/admin/category/update?id=<?=$category['id']?>" class="btn btn-success">Редактировать</a>
 		</div>
 	</div>
 </div>
