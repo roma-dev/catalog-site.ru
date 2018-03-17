@@ -7,6 +7,7 @@ class sqlBuilder {
 	private static $builder = null;
 	
 	private $sql;
+	private $sqlForCount;
 
 	private $select = '*';
 	private $from;
@@ -35,6 +36,12 @@ class sqlBuilder {
 	{	
 		if($param === null) { $this->sql = null; }
 		return $this->sql;
+	}
+	
+	public function sqlForCount($param='')
+	{	
+		if($param === null) { $this->sqlForCount = null; }
+		return $this->sqlForCount;
 	}
 		
 //------------------------------------------------	
@@ -133,6 +140,12 @@ class sqlBuilder {
 		if( !$this->select )	{ return false; }
 		if( !$this->from )		{ return false; }
 		
+		// для выборки количества строк
+		$sqlForCount  = 'SELECT COUNT(*) as rows ';
+		$sqlForCount .= 'FROM ' . $this->from . ' ';
+		$sqlForCount .= $this->where ? 'WHERE ' . $this->where . ' ' : '';
+		$sqlForCount .= $this->orderBy ? 'ORDER BY ' . $this->orderBy . ' ' : '' ;		
+		
 		$sql  =	'SELECT ' . $this->select . ' ';
 		$sql .=	'FROM ' . $this->from . ' ';
 		$sql .= $this->where ? 'WHERE ' . $this->where . ' ' : '';
@@ -145,6 +158,7 @@ class sqlBuilder {
 		$this->from = $this->where = $this->limit = null;
 		
 		$this->sql = $sql;
+		$this->sqlForCount = $sqlForCount;
 		return $sql;
 	}
 
