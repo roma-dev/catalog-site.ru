@@ -14,7 +14,7 @@ $active =  isset($_GET['active']) ? $_GET['active'] : null ;
               <thead>
                 <tr>
                   <th class="col-lg-2">Название</th>
-                  <th class="col-lg-7">Короткое описание</th>
+                  <th class="col-lg-7">Краткое описание</th>
                   <th class="col-lg-2">Статус</th>
                   <th class="col-lg-1"></th>
                 </tr>
