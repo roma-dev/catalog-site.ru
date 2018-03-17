@@ -8,8 +8,10 @@ class Request {
 	private $action;
 	private $id;
 	private $page;
-	private $queryParams;
-	
+	private $queryParams='';
+	private $path;
+
+
 	// для содержания get параметров
 	private $get = [];
 	
@@ -17,6 +19,7 @@ class Request {
 	{
 		if (! $this->checkPath()) { Catalog::$app->httpHeader->error('404', 'Такой страницы не существует!'); }
 		
+		$this->path = $this->getPath();
 		$this->controller = Catalog::$app->rules[ $this->getPath() ]['controller'];
 		$this->action = Catalog::$app->rules[ $this->getPath() ]['action'];
 		$this->id = isset($_GET['id']) ? $_GET['id'] : null; 
