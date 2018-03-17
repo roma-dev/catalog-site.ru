@@ -9,6 +9,9 @@ class Mysql extends MysqlConnect{
 	
 	private $sqlBuilder;
 	
+	private $lastId;
+
+
 	public function __construct($config) {
 		parent::__construct($config);
 		
@@ -18,6 +21,11 @@ class Mysql extends MysqlConnect{
 	public function sqlBuilder()
 	{
 		return $this->sqlBuilder;
+	}
+
+	public function lastId()
+	{
+		return $this->lastId;
 	}
 	
 	
@@ -72,6 +80,9 @@ class Mysql extends MysqlConnect{
 		
 			// отправляем запрос в бд	
 			$countRows = $this->connection->exec($sql);
+			
+			// получаем id вставленной строки
+			$this->lastId = $this->connection->lastInsertId();
 			
 			// в случае успешного исхода фиксируем транзакцию
 			$this->connection->commit();
