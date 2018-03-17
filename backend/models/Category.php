@@ -18,7 +18,7 @@ class Category {
 		Catalog::$app->db->sqlBuilder()
 			->select('*')
 			->from($this->tableName)
-			->orWhereParams(Catalog::$app->request->get, $this->searchColumns)
+			->andWhereParams(Catalog::$app->request->get, $this->searchColumns)
 			->orderBy('id ASC')
 			->limitPagination()
 			->forSelect();
