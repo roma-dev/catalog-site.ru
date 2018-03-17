@@ -21,7 +21,7 @@ class CategoryController {
 		
 		$result = $model->selectCategories();
 		
-		return Catalog::$app->view->render('categories', ['result' => $result, 'page' => $page]);
+		return Catalog::$app->view->render('categories', ['result' => $result]);
 	}
 	
 	public function view($id, $page)
