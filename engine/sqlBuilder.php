@@ -253,11 +253,25 @@ class sqlBuilder {
 
 // ----------------------------------------------	
 
+//	пример использования: где строковые значения необходимо экранировать, а числовые нет
+//	
+//	set([
+//		'name'				=> [ $post['name'],					true  ], 
+//		'short_description' => [ $post['short_description'],	true  ], 
+//		'full_description'	=> [ $post['full_description'],		true  ], 
+//		'active'			=> [ $post['active'],				false ]
+//	])
+	
+	
 	public function set($args = [])
 	{
 		foreach ($args as $column => $value)
 		{
-			$this->set .= '`' . $column . '` = "' . $value . '", ';
+			// если второй параметр массива true оборачиваем в кавычки
+			if($value[1]){ $this->set .= '`' . $column . '` = "' . $value[0] . '", '; continue; }
+			
+			// иначе кавычек не ставим для значения
+			$this->set .= '`' . $column . '` = ' . $value[0] . ', ';
 		}
 		
 		$this->set = rtrim($this->set, ', ');
