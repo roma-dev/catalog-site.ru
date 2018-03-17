@@ -19,7 +19,7 @@ class Request {
 		$this->controller = Catalog::$app->rules[ $this->getPath() ]['controller'];
 		$this->action = Catalog::$app->rules[ $this->getPath() ]['action'];
 		$this->id = isset($_GET['id']) ? $_GET['id'] : null; 
-		$this->page = isset($_GET['page']) ? $_GET['page'] : null; 
+		$this->page = isset($_GET['page']) ? $_GET['page'] : 1; 
 		$this->get = $this->getQueryParams(); 
 		
 		
