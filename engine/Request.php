@@ -8,6 +8,7 @@ class Request {
 	private $action;
 	private $id;
 	private $page;
+	private $queryParams;
 	
 	// для содержания get параметров
 	private $get = [];
@@ -47,7 +48,14 @@ class Request {
 		
 		parse_str($query, $get);
 		
-		// заменяет знаки квадратных скобок на знак процента для вставки
+		// очищаем query params от гет параметра page
+		foreach ($get as $param => $value){
+			
+			if($param == 'page') continue;
+			$this->queryParams .= $param .'='. $value .'&';
+		}
+		
+		// заменяет знаки квадратных скобок на знак процента для выборки после в конструкии LIKE
 		$get = str_replace(['[',']'], "%", $get);
 		
 		return $get;
