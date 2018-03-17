@@ -64,6 +64,16 @@ class sqlBuilder {
 		$this->limit = $string ? $string : '';
 		return self::$builder;
 	}
+	
+	// формирует контрукцию LIMIT для пагинации. Метод основывается на гет параметре page и переменной pagination_limit из конфига
+	// если page=3 то создаст строку '10, 5' (где 5 - это pagination_limit)
+	public function limitPagination()
+	{
+		$string = (Catalog::$app->request->page -1) * Catalog::$app->settings['pagination_limit']; 
+		$string .= ', '. Catalog::$app->settings['pagination_limit'];
+		$this->limit = $string ? $string : '';
+		return self::$builder;
+	}
 
 // получает ассоциативный массив, может распознать числовые и строковые значения
 // 
