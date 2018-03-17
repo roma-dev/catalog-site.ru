@@ -18,7 +18,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Catalog-site.ru</a>
+          <a class="navbar-brand" href="/">Catalog-site.ru</a>
         </div>
       </div>
     </div>
