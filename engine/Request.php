@@ -9,6 +9,9 @@ class Request {
 	private $id;
 	private $page;
 	
+	// для содержания get параметров
+	private $get = [];
+	
 	public function __construct() 
 	{
 		if (! $this->checkPath()) { Catalog::$app->httpHeader->error('404', 'Такой страницы не существует!'); }
@@ -17,6 +20,8 @@ class Request {
 		$this->action = Catalog::$app->rules[ $this->getPath() ]['action'];
 		$this->id = isset($_GET['id']) ? $_GET['id'] : null; 
 		$this->page = isset($_GET['page']) ? $_GET['page'] : null; 
+		$this->get = $this->getQueryParams(); 
+		
 		
 	}
 
@@ -30,7 +35,22 @@ class Request {
 		return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 	}
 
-	/**
+	
+	private function getQueryParams()
+	{
+		// получаем из REQUEST_URI строку query
+		$query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+		// удаляем лишние разделители гет параметров. если они есть.
+		$query = trim( $query, '&'); 
+		
+		$get = [];
+		
+		parse_str($query, $get);
+		
+		return $get;
+	}
+
+		/**
 	 * 
 	 * @return bool Проверяет на наличие адреса в массиве rules
 	 */
