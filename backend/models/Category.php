@@ -55,6 +55,27 @@ class Category {
 		
 	}
 	
+	
+	public function createCategory($post)
+	{
+		$columns = "id, name, short_description, full_description, active";
+		$values = "null, ".$post['name'].", ".$post['short_description'].", ".$post['full_description'].", ".$post['active'];
+		
+		$aql = Catalog::$app->db->sqlBuilder()
+					->tableName($this->tableName)
+					->columns($columns)
+					->values($values)
+					->forInsert();
+		
+		$result = Catalog::$app->db->insertOne();
+		
+		//var_dump(Catalog::$app->db->lastId()); die;
+		
+		// при успешной операции вернет 1, при ошибке выбросит ошибку
+		return $result;
+		
+	}
+
 	public function __get($name) {
 		return $this->$name;
 	}
