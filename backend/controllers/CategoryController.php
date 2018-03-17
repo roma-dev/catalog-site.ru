@@ -24,9 +24,15 @@ class CategoryController {
 		return Catalog::$app->view->render('categories', ['result' => $result]);
 	}
 	
-	public function view($id, $page)
+	public function view($id)
 	{
-		return Catalog::$app->view->render('view', ['id'=> $id, 'page' => $page]);
+		$model = new Category();
+		
+		$result = $model->selectCategory($id);
+		
+		if(!$result) Catalog::$app->httpHeader->error(404,'Такой категории не существует!');
+		
+		return Catalog::$app->view->render('view', ['id'=> $id, 'category' => $result]);
 	}
 	
 	public function update($id, $page)
