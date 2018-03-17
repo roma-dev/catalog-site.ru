@@ -2,6 +2,7 @@
 
 namespace Backend\controllers;
 
+use Backend\models\Category;
 use Engine\Catalog;
 
 class CategoryController {
@@ -16,7 +17,11 @@ class CategoryController {
 
 	public function categories($id, $page)
 	{
-		return Catalog::$app->view->render('categories', ['id'=> $id, 'page' => $page]);
+		$model = new Category();
+		
+		$result = $model->selectCategories();
+		
+		return Catalog::$app->view->render('categories', ['model' => $result, 'page' => $page]);
 	}
 	
 	public function view($id, $page)
