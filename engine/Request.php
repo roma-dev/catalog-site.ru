@@ -47,6 +47,9 @@ class Request {
 		
 		parse_str($query, $get);
 		
+		// заменяет знаки квадратных скобок на знак процента для вставки
+		$get = str_replace(['[',']'], "%", $get);
+		
 		return $get;
 	}
 
