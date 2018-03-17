@@ -87,12 +87,16 @@ class sqlBuilder {
 //	создаст строку вида 
 //	SELECT name FROM category WHERE `id` = 5 OR `name` LIKE "%string%" ORDER BY name DESC
 			
-	public function orWhereParams( $args = [])
+	public function orWhereParams( $get = [], $columns)
 	{
 		$returnString = '';
 		
-		foreach ($args as $column => $value)
+		foreach ($get as $column => $value)
 		{
+			// если в массиве get имеются параметры отличные от тех по которым мы хотим реализовать поиск
+			// то заверщаем итерацию цикла
+			if( !in_array( $column , $columns) ) continue;
+					
 			// если переменная не числовая, то экранируем кавычками
 			if(!is_numeric($value)){ 
 				$returnString .= $value = '`'.$column . '`' . ' LIKE "'. $value . '" OR '; 
