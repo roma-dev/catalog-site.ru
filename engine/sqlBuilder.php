@@ -87,7 +87,7 @@ class sqlBuilder {
 //	создаст строку вида 
 //	SELECT name FROM category WHERE `id` = 5 OR `name` LIKE "%string%" ORDER BY name DESC
 			
-	public function orWhereParams( $get = [], $columns)
+	public function andWhereParams( $get = [], $columns)
 	{
 		$returnString = '';
 		
@@ -99,14 +99,14 @@ class sqlBuilder {
 					
 			// если переменная не числовая, то экранируем кавычками
 			if(!is_numeric($value)){ 
-				$returnString .= $value = '`'.$column . '`' . ' LIKE "'. $value . '" OR '; 
+				$returnString .= $value = '`'.$column . '`' . ' LIKE "'. $value . '" AND '; 
 				continue;
 			}
 			
-			$returnString .= '`'.$column . '` = ' . $value . ' OR ' ;
+			$returnString .= '`'.$column . '` = ' . $value . ' AND ' ;
 		}
 		
-		$returnString = rtrim($returnString, ' OR');
+		$returnString = rtrim($returnString, ' AND');
 		
 		$this->where = $returnString ? $returnString : '';
 		
