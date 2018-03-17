@@ -46,7 +46,7 @@ class Category {
 		Catalog::$app->db->sqlBuilder()
 				->select('*')
 				->from($this->tableName)
-				->where('id="'.$id.'"')
+				->where('id='.$id.'')
 				->forSelect();
 		
 		$result = Catalog::$app->db->selectOne();
@@ -61,19 +61,41 @@ class Category {
 		$columns = "id, name, short_description, full_description, active";
 		$values = "null, ".$post['name'].", ".$post['short_description'].", ".$post['full_description'].", ".$post['active'];
 		
-		$aql = Catalog::$app->db->sqlBuilder()
-					->tableName($this->tableName)
-					->columns($columns)
-					->values($values)
-					->forInsert();
+		Catalog::$app->db->sqlBuilder()
+			->tableName($this->tableName)
+			->columns($columns)
+			->values($values)
+			->forInsert();
 		
 		$result = Catalog::$app->db->insertOne();
-		
-		//var_dump(Catalog::$app->db->lastId()); die;
 		
 		// при успешной операции вернет 1, при ошибке выбросит ошибку
 		return $result;
 		
+	}
+	
+	
+	public function updateCategory($post)
+	{
+		$columns = "id, name, short_description, full_description, active";
+		$values = "null, ".$post['name'].", ".$post['short_description'].", ".$post['full_description'].", ".$post['active'];
+
+		$sql = Catalog::$app->db->sqlBuilder()
+			->tableName($this->tableName)
+			->set(
+				[
+					'name'				=> [ $post['name'],					true  ], 
+					'short_description' => [ $post['short_description'],	true  ], 
+					'full_description'	=> [ $post['full_description'],		true  ], 
+					'active'			=> [ $post['active'],				false ]
+				])
+			->where("id = ".$post['id'])
+			->forUpdate();
+		
+		$result = Catalog::$app->db->update();
+		
+		// при успешной операции вернет 1, при ошибке выбросит ошибку
+		return $result;
 	}
 
 	public function __get($name) {
