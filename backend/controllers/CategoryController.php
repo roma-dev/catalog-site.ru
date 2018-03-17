@@ -40,9 +40,23 @@ class CategoryController {
 		return Catalog::$app->view->render('update', ['id'=> $id, 'page' => $page]);
 	}
 	
-	public function create($id, $page)
+	public function create()
 	{
-		return Catalog::$app->view->render('create', ['id'=> $id, 'page' => $page]);
+		// если нет пост данных то рендерим страницу
+		if(!isset($_POST['Category'])) { return Catalog::$app->view->render('create',['error'=> false]); }
+		
+		$model = new Category();
+		
+		$result = $model->createCategory($_POST['Category']);
+		
+		// вернет количество измененых строк в бд. вставляем одну запись значит при успехе $result будет равен 1
+		if($result == 1)
+		{
+			// редиректим на страницу просмотра категории
+			Catalog::$app->httpHeader->redirect('/admin/category/view?id='.Catalog::$app->db->lastId(), 302);
+		}
+
+		return Catalog::$app->view->render('create', [ 'error' => true, 'errorMessage' => 'При вставки данных что-то пошло не так!']);
 	}
 	
 }
