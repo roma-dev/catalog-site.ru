@@ -39,8 +39,8 @@ $pagination = false;
 			<div class="col-lg-7 form-horizontal__item-right-col">
 				<select name="Category[active]" id="active" type="text" class="form-control" required>
 						<option></option>
-						<option value="1" <?= ($result['active'] == '1')? 'selected':'';?>>Активные</option>
-						<option value="0" <?= ($result['active'] == '0')? 'selected':'';?>>Неактивные</option>
+						<option value="1" <?= ($result['active'] == '1')? 'selected':'';?>>Активная</option>
+						<option value="0" <?= ($result['active'] == '0')? 'selected':'';?>>Неактивная</option>
 			  </select>
 			</div>
 		</div>
