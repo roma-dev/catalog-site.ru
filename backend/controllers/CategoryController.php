@@ -45,7 +45,7 @@ class CategoryController {
 		if(!$result) Catalog::$app->httpHeader->error(404, 'Такой категории не существует!');
  
 		// если нет пост данных то рендерим страницу
-		if(!isset($_POST['Category'])) { return Catalog::$app->view->render('update',[ 'result' => $result, 'error'=> false]); }
+		if(!isset($_POST['Category'])) { return Catalog::$app->view->render('update',[ 'result' => $result]); }
 				
 		$updateResult = $model->updateCategory($_POST['Category']);
  
@@ -56,13 +56,13 @@ class CategoryController {
 			Catalog::$app->httpHeader->redirect('/admin/category/view?id='.$result['id'], 302);
 		}
  
-		return Catalog::$app->view->render('update', [ 'result' => $result, 'error' => true, 'errorMessage' => 'При вставки данных что-то пошло не так!']);
+		return Catalog::$app->view->render('update', [ 'result' => $result, 'errorMessage' => 'При вставки данных что-то пошло не так!']);
 	}
 	
 	public function create()
 	{
 		// если нет пост данных то рендерим страницу
-		if(!isset($_POST['Category'])) { return Catalog::$app->view->render('create',['error'=> false]); }
+		if(!isset($_POST['Category'])) { return Catalog::$app->view->render('create'); }
 		
 		$model = new Category();
 		
@@ -75,7 +75,7 @@ class CategoryController {
 			Catalog::$app->httpHeader->redirect('/admin/category/view?id='.Catalog::$app->db->lastId(), 302);
 		}
 
-		return Catalog::$app->view->render('create', [ 'error' => true, 'errorMessage' => 'При вставки данных что-то пошло не так!']);
+		return Catalog::$app->view->render('create', [ 'errorMessage' => 'При вставки данных что-то пошло не так!']);
 	}
 	
 }
