@@ -2,7 +2,7 @@
 $title = 'Обновление категории'; 
 $pagination = false;
 ?>
-<?php if($error): ?>
+<?php if(isset($errorMessage)): ?>
 <div class="row">
 	<div class="alert alert-danger alert-dismissable col-lg-10">
 	  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
