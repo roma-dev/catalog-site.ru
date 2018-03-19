@@ -1,7 +1,7 @@
 <?php 
 	if(isset($category))
 	{
-		$title = 'Категория '. $category['name'];
+		$title = $category['name'];
 		$seotext = $category['full_description'];
 	}else
 	{
