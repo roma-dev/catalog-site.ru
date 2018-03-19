@@ -1,45 +1,14 @@
 
 <?php 
-$title = 'Главная'; 
+$title = 'Catalog-site.ru';
+$seotext = "Добро пожаловать на наш сайт! <br>У нас вы можете <strong>купить товары в Смоленске по доступной цене</strong> с доставкой на дом.";
 $pagination = true;
 ?>
 
-<table class="table table-striped">
-      <thead>
-        <tr>
-          <th class="col-xs-2">Категории</th>
-          <th class="col-xs-7">Описание категории</th>
-          <th class="col-xs-1"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Мужские футболки</td>
-          <td>
-			 Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Скатился послушавшись, наш. Заманивший над строчка сбить осталось до, дороге.
-		  </td>
-          <td>
-			  <a class="btn btn-success" href="#">Подробнее</a>
-		  </td>
-        </tr>
-        <tr>
-          <td>Женские футболки</td>
-          <td>
-			 Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Скатился послушавшись, наш. Заманивший над строчка сбить осталось до, дороге.
-		  </td>
-          <td>
-			  <a class="btn btn-success" href="#">Подробнее</a>
-		  </td>
-        </tr>
-        <tr>
-          <td>Детские футболки</td>
-          <td>
-			 Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Скатился послушавшись, наш. Заманивший над строчка сбить осталось до, дороге.
-		  </td>
-          <td>
-			  <a class="btn btn-success" href="#">Подробнее</a>
-		  </td>
-        </tr>
-      </tbody>
-</table>
-
+<?php foreach ($categories as $category):?>
+<div class="col-md-4">
+  <h2><?=$category['name']?></h2>
+  <p><?=$category['short_description']?></p>
+  <p><a class="btn btn-success" href="/category?page=<?=$category['id']?>">Подробнее</a></p>
+</div>
+<?php endforeach;?>
