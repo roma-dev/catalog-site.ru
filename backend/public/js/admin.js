@@ -7,11 +7,17 @@ $( document ).ready(function() {
 		var name = $( "#search-name" );
 		var short_description = $( "#search-short_description" );
 		var active = $( "#search-active" );
+		// для товаров
+		var count = $( "#search-count" );
+		var is_available = $( "#search-is_available" );
 		
 		// если значение не пустое
 		if(name.val()){ getParams += name.attr('name') + '=[' + name.val() + ']&'; }
 		if(short_description.val()){ getParams += short_description.attr('name') + '=[' + short_description.val() + ']&'; }
 		if(active.val()) { getParams += active.attr('name') + '=' + active.val() + '&'; }
+		// для товаров
+		if(count.val()) { getParams += count.attr('name') + '=' + count.val() + '&'; }
+		if(is_available.val()) { getParams += is_available.attr('name') + '=' + is_available.val() + '&'; }
 		
 		// удаляем лишний &  с конца строки.
 		getParams = getParams.substring(0, getParams.length - 1);
