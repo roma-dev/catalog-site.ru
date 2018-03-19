@@ -12,6 +12,8 @@ $pagination = false;
 <?php endif;?>
 
 <form class="form-horizontal" action="/admin/good/update?id=<?=$good['id']?>" method="post">
+	
+	<input type="hidden" name="Good[id]" value="<?=$good['id']?>">
 	<div class="row">
 		<div class="row form-horizontal__item-row">
 			<div class="col-lg-3 form-horizontal__item-left-col"><h4>Название товара</h4></div>
@@ -69,7 +71,7 @@ $pagination = false;
 					
 					<div class="col-lg-8 input-category-group">
 						<?php foreach ($currentCategories as $category): ?>
-							<input value="<?=$category['name']?>" name="<?=$category['id']?>" type="text" class="form-control input-category__item" readonly>
+							<input value="<?=$category['name']?>" name="Good[category_id][<?=$category['id']?>]" type="text" class="form-control input-category__item" readonly>
 						<?php endforeach;?>
 					</div>
 				</div>
