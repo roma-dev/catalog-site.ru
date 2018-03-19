@@ -62,12 +62,14 @@ use Engine\Catalog;
 		<?php 
 			if($pagination)
 			{
-				echo $this->pagination(
-					Catalog::$app->settings['counts'], 
-					Catalog::$app->request->page, 
-					Catalog::$app->settings['pagination_limit'], 
-					Catalog::$app->settings['pagination_points']
-					); 	
+				if(isset(Catalog::$app->settings['counts'])){
+					echo $this->pagination(
+						Catalog::$app->settings['counts'], 
+						Catalog::$app->request->page, 
+						Catalog::$app->settings['pagination_limit'], 
+						Catalog::$app->settings['pagination_points']
+						); 	
+				}
 			}
 		?>
       <footer>
