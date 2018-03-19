@@ -65,3 +65,7 @@ body {
 .form-horizontal__item-left-col{
 	text-align: right;
 }
+/*------------------------------*/
+.select-category-item, .input-category__item{
+	margin-bottom: 10px;
+}

@@ -20,4 +20,24 @@ $( document ).ready(function() {
 		
 		window.location = location;
 	});
+	
+	
+	$('#add-category-button').click(function(){
+		// берем выпадающий список у первого селекта
+		var htmlOptions = $('.first-category-item').html();
+		
+		var htmlSelect = 
+				'<div class="input-group select-category-item">'
+				+ '<select name="Good[category_id][]" type="text" class="col-lg-3 form-control select-category-item">'
+				+ htmlOptions
+				+ '</select>'
+				+ '<span class="input-group-btn">'
+				+ '<button onclick="$(this).parents(\'div.input-group\').remove();" class="btn btn-danger delete-category-block" type="button"><span class="glyphicon glyphicon-remove"></span></button>'
+				+ '</span>'
+				+ '</div>';
+		
+		$('#select-category-container').append(htmlSelect);
+		
+	});
+	
 });
