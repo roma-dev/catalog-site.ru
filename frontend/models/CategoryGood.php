@@ -27,5 +27,23 @@ class CategoryGood {
 		return $returnArr;
 	}
 			
+	public function selectIdCategories($id_good)
+	{
+		$sql = 'SELECT category_id FROM '.$this->tableName.' WHERE goods_id = '.$id_good.' ORDER BY goods_id DESC';
+		
+		$result = Catalog::$app->db->select($sql);
+		
+		// если пустой массив выводим false
+		if($result === []) return false;
+		
+		$returnArr = [];
+		
+		foreach ($result as $good)
+		{
+			$returnArr[] = $good['category_id'];
+		}
+		
+		return $returnArr;
+	}
 	
 }
