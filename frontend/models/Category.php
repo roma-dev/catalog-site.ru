@@ -32,6 +32,20 @@ class Category {
 		return $result;
 	}
 	
+	public function selectOne($id)
+	{
+		Catalog::$app->db->sqlBuilder()
+			->select('*')
+			->from($this->tableName)
+			->where('id = '.$id)
+			->forSelect();
+		
+		$result = Catalog::$app->db->selectOne();
+		
+		if($result === []) return false;
+		
+		return $result;
+	}
 	
 	
 }
