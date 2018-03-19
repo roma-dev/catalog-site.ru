@@ -191,7 +191,7 @@ class Mysql extends MysqlConnect{
 		// проверка переданного значения и свойства объекта билдера
 		if($sql === null) {$sql = $this->sqlBuilder->sql();}
 		if(!$sql){ return false; }
-		
+			
 		try 
 		{
 			// открытие транзакции
