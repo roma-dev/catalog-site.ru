@@ -77,10 +77,7 @@ class Category {
 	
 	public function updateCategory($post)
 	{
-		$columns = "id, name, short_description, full_description, active";
-		$values = "null, ".$post['name'].", ".$post['short_description'].", ".$post['full_description'].", ".$post['active'];
-
-		$sql = Catalog::$app->db->sqlBuilder()
+		Catalog::$app->db->sqlBuilder()
 			->tableName($this->tableName)
 			->set(
 				[
@@ -97,6 +94,21 @@ class Category {
 		// при успешной операции вернет 1, при ошибке выбросит ошибку
 		return $result;
 	}
+
+	
+	public function selectNameCategories()
+	{
+		$sql = Catalog::$app->db->sqlBuilder()
+			->select('id, name')
+			->from($this->tableName)
+			->orderBy('id ASC')
+			->forSelect();
+		
+		$result = Catalog::$app->db->select();
+		
+		return $result;
+	}
+
 
 	public function __get($name) {
 		return $this->$name;
