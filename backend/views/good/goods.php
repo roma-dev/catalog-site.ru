@@ -50,8 +50,8 @@ $is_available		=  isset($_GET['is_available']) ? $_GET['is_available'] : null ;
                   <td><span><?=$row['count']?></span></td>
 				  <td><span><?=$row['is_available'] ? "Доступен" : "Недоступен";?></span></td>
                   <td class="table-td-icons-block">
-					  <a href="/admin/category/view?id=<?=$row['id']?>"><span class="glyphicon glyphicon-eye-open"></span></a>
-					  <a href="/admin/category/update?id=<?=$row['id']?>"><span class="glyphicon glyphicon-pencil"></span></a>
+					  <a href="/admin/dood/view?id=<?=$row['id']?>"><span class="glyphicon glyphicon-eye-open"></span></a>
+					  <a href="/admin/good/update?id=<?=$row['id']?>"><span class="glyphicon glyphicon-pencil"></span></a>
 					  
 				  </td>
                 </tr>
