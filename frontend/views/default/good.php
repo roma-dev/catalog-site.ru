@@ -1,21 +1,21 @@
 <?php 
-$title = 'Продукт'; 
+
+$title = isset($good)? $good['name'] : 'Товар';
+$seotext = '';
 $pagination = false;
 ?>
 
 <div class="row">
 	<div class="col-lg-6">
-		<p>
-			Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Свою над букв даже речью маленький путь одна текста, вскоре безопасную что текст залетают запятой lorem текстами использовало дороге пустился текстов взгляд толку буквоград рукописи предложения имеет вершину, рот! Речью назад грамматики щеке буквенных. Запятой всемогущая, семантика! Меня, но, повстречался.
-		</p>	
+		<p><?=$good['full_description']?></p>	
 	</div>
 	
 	<div class="col-lg-6">
 		<dl>
-			<dt>Наличие на складе:</dt>
-			<dd>15 шт.</dd>
-			<dt>Доступность по предзаказу:</dt>
-			<dd class="text-danger">Не доступен</dd>
+			<dt>Наличие на складе:</dt><dd><?= $good['count']? $good['count'] : 'Нет в наличии'?> шт.</dd>
+			<?php if(!$good['count']):?>
+			<dt>Доступность по предзаказу:</dt><dd class="text-danger"><?= $good['is_available']? 'Доступен' : 'Не доступен'?></dd>
+			<?php endif;?>
 		</dl>
 		<div class="row">
 			<a class="btn btn-success btn-lg" href="#">Заказать</a>
@@ -27,8 +27,8 @@ $pagination = false;
 <div class="row">
 	<h3>Посмотреть похожие товары:</h3>
 	<ul>
-		<li><a href="#">Мужские футболки</a></li>
-		<li><a href="#">Красные футболки</a></li>
-		<li><a href="#">Хлопковые футболки</a></li>
+		<?php foreach($categories as $category):?>
+		<li><a href="/category?id=<?=$category['id']?>"><?=$category['name']?></a></li>
+		<?php endforeach;?>
 	</ul>
 </div>
