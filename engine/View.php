@@ -100,9 +100,8 @@ class View {
 	// Catalog::$app->settings['pagination_limit'];
 	// Catalog::$app->settings['pagination_points'];
 	
-	public function pagination($pagination=true,$counts=null, $page_id=null, $p_limit=null, $p_points=null)
+	public function pagination($counts=null, $page_id=null, $p_limit=null, $p_points=null)
 	{
-		if(!$pagination) return '';
 		// если какая либо переменная не установлена
 		if( !isset($counts) && !isset($page_id) && !isset($p_limit) && !isset($p_points) ) return false;
 		
@@ -128,8 +127,13 @@ class View {
 		// перебираем все возможные точки пагинации с поиском текущей точки пагинации
 		if($p_all_points <= $p_points || $p_all_points > $p_points && $p_center_points >= $page_id)
 		{
+			// если количество возможных точек меньше желаемых, то для перебора берем количество возможных
+			if($p_all_points < $p_points){ $iteration_count_points = $p_all_points;}
+			// иначе строим пагинацию по полному желаемому количеству точек
+			else{ $iteration_count_points = $p_points; }
+			
 			// перебираем
-			for($i = 1; $i <= $p_points; $i++)
+			for($i = 1; $i <= $iteration_count_points; $i++)
 			{
 				if($i == $page_id) // ищем текущую страницу
 				{
