@@ -34,9 +34,8 @@ class Good {
 		
 		// для пагинации
 		$counts = Catalog::$app->db->selectOne(Catalog::$app->db->sqlBuilder()->sqlForCount());
-		
 		// сохраняем количество строк в свойство
-		$this->counts = $counts['rows'];
+		Catalog::$app->settings = ['counts', $counts['rows'] ];
 		
 		return $result;
 	}
