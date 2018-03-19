@@ -12,7 +12,7 @@ $pagination = false;
 	
 	<div class="col-lg-6">
 		<dl>
-			<dt>Наличие на складе:</dt><dd><?= $good['count']? $good['count'] : 'Нет в наличии'?> шт.</dd>
+			<dt>Наличие на складе:</dt><dd><?= $good['count']? $good['count'] . ' шт.' : 'Нет в наличии'?></dd>
 			<?php if(!$good['count']):?>
 			<dt>Доступность по предзаказу:</dt><dd class="text-danger"><?= $good['is_available']? 'Доступен' : 'Не доступен'?></dd>
 			<?php endif;?>
