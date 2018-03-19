@@ -1,4 +1,9 @@
+<?php
+use Engine\Catalog;
+
+?>
 <!DOCTYPE html>
+
 <html>
 <head>
 	<meta charset="utf-8">
@@ -38,19 +43,19 @@
           
 			<?= $content ?>
 		  
-			<?php if($pagination): ?>	
-				<div class="row text-right">
-					<ul class="pagination">
-						<li class="disabled"><a href="#">&laquo;</a></li>
-						<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-						<li class=""><a href="#">1 <span class="sr-only">(current)</span></a></li>
-						<li class=""><a href="#">1 <span class="sr-only">(current)</span></a></li>
-						<li class=""><a href="#">1 <span class="sr-only">(current)</span></a></li>
-						<li class="disabled"><span>&raquo;</span></li>
-
-					</ul>
-				</div>
-			<?php endif; ?>	
+		<?php 
+			if($pagination)
+			{
+				if(isset(Catalog::$app->settings['counts'])){
+					echo $this->pagination(
+						Catalog::$app->settings['counts'], 
+						Catalog::$app->request->page, 
+						Catalog::$app->settings['pagination_limit'], 
+						Catalog::$app->settings['pagination_points']
+						); 	
+				}
+			}
+		?>
 		  
         </div>
       </div>
