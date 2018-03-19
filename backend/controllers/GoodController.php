@@ -30,7 +30,15 @@ class GoodController {
 		
 		if(!$result) Catalog::$app->httpHeader->error(404,'Такого товара не существует!');
 		
-		return Catalog::$app->view->render('view', ['id'=> $id, 'good' => $result]);
+		$modelCategoryGood = new CategoryGood();
+
+		$currentCategories = $modelCategoryGood->selectCategories($id);
+
+		$modelCategory = new Category();
+
+		$categories = $modelCategory->selectNameCategories();
+		
+		return Catalog::$app->view->render('view', ['currentCategories' => $currentCategories, 'good' => $result]);
 	}
 	
 	public function update($id)
@@ -48,6 +56,7 @@ class GoodController {
 			// вернет false если не найдет записи по id
 			if(!$good) Catalog::$app->httpHeader->error(404, 'Такого товара не существует! ');
 
+			// все это правильнее сделать черех join но пока так
 			$modelCategoryGood = new CategoryGood();
 
 			$currentCategories = $modelCategoryGood->selectCategories($id);
@@ -62,11 +71,11 @@ class GoodController {
 		
 		$modelGood = new Good();
 		
-		$result = $modelGood->createGood($_POST['Good']);
+		$result = $modelGood->updateGood($_POST['Good']);
 		
-		$category_good = new CategoryGood();
-			
-		$category_good->createCategoryId( $id, $_POST['Good']['category_id'] );
+		// пока обновление списка категорий товара не реализовано
+		//$category_good = new CategoryGood();
+		//$category_good->createCategoryId( $id, $_POST['Good']['category_id'] );
 		
 		// редиректим на страницу вида товара
 		Catalog::$app->httpHeader->redirect('/admin/good/view?id='.$id, 302);
