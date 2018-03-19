@@ -22,7 +22,8 @@ class Category {
 		
 		$result = Catalog::$app->db->select();
 		
-		if(!is_array($result) && empty($result)) return false;
+		// если пустой массив значит нет категорий для текущей страницы пагинации
+		if($result == []) Catalog::$app->httpHeader->error(404, 'Такой страницы не существует! ');
 		
 		// необходимо для пагинации
 		$counts = Catalog::$app->db->selectOne(Catalog::$app->db->sqlBuilder()->sqlForCount());
