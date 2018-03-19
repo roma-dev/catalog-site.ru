@@ -100,8 +100,9 @@ class View {
 	// Catalog::$app->settings['pagination_limit'];
 	// Catalog::$app->settings['pagination_points'];
 	
-	public function pagination($counts, $page_id, $p_limit, $p_points)
+	public function pagination($pagination=true,$counts=null, $page_id=null, $p_limit=null, $p_points=null)
 	{
+		if(!$pagination) return '';
 		// если какая либо переменная не установлена
 		if( !isset($counts) && !isset($page_id) && !isset($p_limit) && !isset($p_points) ) return false;
 		
