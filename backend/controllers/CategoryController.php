@@ -55,8 +55,14 @@ class CategoryController {
 			// редиректим на страницу просмотра категории
 			Catalog::$app->httpHeader->redirect('/admin/category/view?id='.$result['id'], 302);
 		}
- 
-		return Catalog::$app->view->render('update', [ 'result' => $result, 'errorMessage' => 'При вставки данных что-то пошло не так!']);
+		
+		// если вернет 0 значит данные не были изменены
+		if($updateResult == 0)
+		{
+			return Catalog::$app->view->render('update', [ 'result' => $result, 'errorMessage' => 'Вы не изменили данные в полях формы!']);
+		}
+		// если мы тут значит что-то пошло не так
+		return Catalog::$app->view->render('update', [ 'result' => $result, 'errorMessage' => 'При обновлении данных что-то пошло не так!']);
 	}
 	
 	public function create()
