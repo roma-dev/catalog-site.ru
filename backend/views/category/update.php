@@ -46,7 +46,7 @@ $pagination = false;
 		</div>
 		<div class="row form-horizontal__item-row" style="text-align: right; ">
 			<div class="col-lg-10">
-				<button class="btn btn-success btn-lg" type="submit">Создать категорию</button>
+				<button class="btn btn-success btn-lg" type="submit">Обновить категорию</button>
 			</div>
 		</div>
 	</div>
