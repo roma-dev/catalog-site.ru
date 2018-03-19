@@ -13,6 +13,12 @@ $pagination = false;
 			<dt class="view-dt-dd">Статус:</dt>					<dd class="view-dt-dd"><?= $good['active'] ? 'Активный': 'Неактивный'?></dd>
 			<dt class="view-dt-dd">Количество на складе:</dt>	<dd class="view-dt-dd"><?= $good['count']?></dd>
 			<dt class="view-dt-dd">Предзаказ:</dt>				<dd class="view-dt-dd"><?= $good['is_available'] ? 'Доступен': 'Недоступен'?></dd>
+			<dt class="view-dt-dd">Категории товара:</dt>		
+				<dd class="view-dt-dd">
+				<?php foreach ($currentCategories as $category): ?>
+					<span><?=$category['name']?></span><br>
+				<?php endforeach;?>
+				</dd>
 		</dl>
 
 		<div class="row text-right">
