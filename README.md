@@ -5,6 +5,7 @@
 * Создать host catalog-site.ru
 * Создать базу данных catelog-site
 * Импортировать файл all_catalog-site.sql
+* Вход в админку /admin/login
 
 ## Пароли
 
