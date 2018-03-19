@@ -55,16 +55,17 @@
       </div>
 
       <hr>
+	  <?php if($pagination): ?>
 	  <div class="row text-right">
-	  <ul class="pagination">
-		<li class=""><a href="#">1 <span class="sr-only"></span></a></li>
-		<li class=""><a href="#">1 <span class="sr-only"></span></a></li>
-		<li class="active"><a href="#">1 <span class="sr-only"></span></a></li>
-		<li class=""><a href="#">1 <span class="sr-only"></span></a></li>
-		<li class=""><a href="#">1 <span class="sr-only"></span></a></li>
-	  </ul>
+		<ul class="pagination">
+		  <li class=""><a href="#">1 <span class="sr-only"></span></a></li>
+		  <li class=""><a href="#">1 <span class="sr-only"></span></a></li>
+		  <li class="active"><a href="#">1 <span class="sr-only"></span></a></li>
+		  <li class=""><a href="#">1 <span class="sr-only"></span></a></li>
+		  <li class=""><a href="#">1 <span class="sr-only"></span></a></li>
+		</ul>
 	  </div>
-	  
+	  <?php endif; ?>
       <footer>
         <p>&copy; Catalog-site.ru 2018</p>
       </footer>
