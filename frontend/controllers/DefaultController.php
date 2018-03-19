@@ -3,12 +3,17 @@
 namespace Frontend\controllers;
 
 use Engine\Catalog;
+use Frontend\models\Category;
 
 class DefaultController {
 
-	public function index($id, $page)
+	public function index($page)
 	{
-		return Catalog::$app->view->render('index', ['id'=> $id, 'page' => $page]);
+		$model = new Category();
+		
+		$result = $model->selectAll();
+		
+		return Catalog::$app->view->render('index', ['categories' => $result, 'page' => $page]);
 	}
 			
 }
