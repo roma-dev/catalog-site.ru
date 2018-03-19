@@ -1,4 +1,5 @@
 <?php 
+
 	if(isset($category))
 	{
 		$title = $category['name'];
@@ -8,26 +9,34 @@
 		$title = 'Catalog-site.ru';
 		$seotext = '';
 	}
+	
 	$pagination = true;
 ?>	
-<?php if($goods !== []):?>
-	<?php foreach ($goods as $good):?>
-	<div class="col-md-4">
-	  <h2><?=$good['name']?></h2>
-	  <p><?=$good['short_description']?></p>
+
+<?php for($i = 0, $j = 1; $i < count($goods); $i++, $j++): ?>
+	<?php if($j == 1) echo '<div class="row">'; ?>
+	<div class="col-md-4"><h2><?=$goods[$i]['name']?></h2>
+	  <p><?=$goods[$i]['short_description']?></p>
 	  <?php
-	  if($good['count'] == 0)
+	  if($goods[$i]['count'] == 0)
 	  {
 		  echo "<p class=\"text-danger\">Нет в наличии</p>";
-		  if( $good['is_available'] ) echo '<p>Доступен по предзаказу</p>';
+		  if( $goods[$i]['is_available'] ) echo '<p>Доступен по предзаказу</p>';
 	  }else
 	  {
-		  echo "<p>Количество на скаде: " . $good['count'] . " шт.</p>";
+		  echo "<p>Количество на скаде: " . $goods[$i]['count'] . " шт.</p>";
 	  }
 	  ?>
-	  <p><a class="btn btn-success" href="/good?id=<?=$good['id']?>">Подробнее</a></p>
+	  <p><a class="btn btn-success" href="/good?id=<?=$goods[$i]['id']?>">Подробнее</a></p>
 	</div>
-	<?php endforeach;?>
-<?php else:?>
+
+	<?php if($j == 3) {
+		echo '</div>'; 
+		$j=0;
+	}
+	?>
+<?php endfor; ?>
+
+<?php if($goods === []):?>
 	<h3>В категории нет товаров!</h3>
 <?php endif;?>
