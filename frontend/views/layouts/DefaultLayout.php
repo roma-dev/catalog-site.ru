@@ -66,6 +66,6 @@
 	  </div>
 	  
       <footer>
-        <p>&copy; Company 2014</p>
+        <p>&copy; Catalog-site.ru 2018</p>
       </footer>
     </div> <!-- /container -->
