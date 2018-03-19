@@ -5,4 +5,5 @@ return [
 	'viewsPath' => 'backend/views/default',
 	'controllerNamespace' => '\\Backend\\controllers\\',
 	'pagination_limit' => 5,
+	'pagination_points' => 5,
 ];

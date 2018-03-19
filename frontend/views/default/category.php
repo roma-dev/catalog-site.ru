@@ -1,5 +1,7 @@
 <?php 
 
+use Engine\Catalog;
+
 	if(isset($category))
 	{
 		$title = $category['name'];

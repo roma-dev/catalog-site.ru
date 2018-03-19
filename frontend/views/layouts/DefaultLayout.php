@@ -1,3 +1,6 @@
+<?php
+use Engine\Catalog;
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -55,17 +58,18 @@
       </div>
 
       <hr>
-	  <?php if($pagination): ?>
-	  <div class="row text-right">
-		<ul class="pagination">
-		  <li class=""><a href="#">1 <span class="sr-only"></span></a></li>
-		  <li class=""><a href="#">1 <span class="sr-only"></span></a></li>
-		  <li class="active"><a href="#">1 <span class="sr-only"></span></a></li>
-		  <li class=""><a href="#">1 <span class="sr-only"></span></a></li>
-		  <li class=""><a href="#">1 <span class="sr-only"></span></a></li>
-		</ul>
-	  </div>
-	  <?php endif; ?>
+	  
+		<?php 
+			if($pagination)
+			{
+				echo $this->pagination(
+					Catalog::$app->settings['counts'], 
+					Catalog::$app->request->page, 
+					Catalog::$app->settings['pagination_limit'], 
+					Catalog::$app->settings['pagination_points']
+					); 	
+			}
+		?>
       <footer>
         <p>&copy; Catalog-site.ru 2018</p>
       </footer>
