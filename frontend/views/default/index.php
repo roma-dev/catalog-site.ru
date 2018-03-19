@@ -9,6 +9,6 @@ $pagination = true;
 <div class="col-md-4">
   <h2><?=$category['name']?></h2>
   <p><?=$category['short_description']?></p>
-  <p><a class="btn btn-success" href="/category?page=<?=$category['id']?>">Подробнее</a></p>
+  <p><a class="btn btn-success" href="/category?id=<?=$category['id']?>">Подробнее</a></p>
 </div>
 <?php endforeach;?>
