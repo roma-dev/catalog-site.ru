@@ -19,7 +19,12 @@ class GoodController {
 	
 	public function goods($id, $page)
 	{
-		return Catalog::$app->view->render('goods', ['id'=> $id, 'page' => $page]);
+		$model = new Good();
+		
+		$result = $model->selectGoods();
+		
+		return Catalog::$app->view->render('goods', ['result' => $result]);
+	
 	}
 	
 	public function view($id)
