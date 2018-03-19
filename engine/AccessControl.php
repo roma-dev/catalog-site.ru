@@ -14,7 +14,7 @@ class AccessControl {
 		}
 	}
 
-
+	
 	public static function isAdmin()
 	{
 		if( isset($_SESSION['admin']) ) { return true; }

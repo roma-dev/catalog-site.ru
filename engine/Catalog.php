@@ -46,7 +46,7 @@ class Catalog
 	{
 		return self::$app->services[$name];	
 	}
-	
+
 	
 	public function goAction()
 	{
