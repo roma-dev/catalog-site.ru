@@ -16,7 +16,31 @@ class Good {
 		return $this->counts;
 	}
 	
-	
+	public function selectGoods()
+	{
+		// формирует sql для выборки
+		// берутся параметры из гет запроса 
+		Catalog::$app->db->sqlBuilder()
+			->select('*')
+			->from($this->tableName)
+			->andWhereParams(Catalog::$app->request->get, $this->searchColumns)
+			->orderBy('id ASC')
+			->limitPagination()
+			->forSelect();
+		
+		$result = Catalog::$app->db->select();
+		
+		if(!is_array($result) && empty($result)) return false;
+		
+		// для пагинации
+		$counts = Catalog::$app->db->selectOne(Catalog::$app->db->sqlBuilder()->sqlForCount());
+		
+		// сохраняем количество строк в свойство
+		$this->counts = $counts['rows'];
+		
+		return $result;
+	}
+
 	public function createGood($post)
 	{
 		$columns = "id, name, short_description, full_description, active, count, is_available";
