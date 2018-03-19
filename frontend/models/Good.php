@@ -35,6 +35,24 @@ class Good {
 		//print_r($arrGoods); die;
 	}
 	
-	
+	public function selectOne($id_good)
+	{
+		$sql = Catalog::$app->db->sqlBuilder()
+			->select('*')
+			->from($this->tableName)
+			->where('id = '.$id_good)
+			->forSelect();
+		
+		$good = Catalog::$app->db->selectOne();
+		
+		// если false то значит такого товара нет в бд
+		if(!$good)  Catalog::$app->httpHeader->error(404, 'Товар был удален или еще не создан! ');
+		
+		return $good;
+		
+		
+		return $good;
+		
+	}
 	
 }
