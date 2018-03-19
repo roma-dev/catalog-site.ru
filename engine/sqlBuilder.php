@@ -154,8 +154,7 @@ class sqlBuilder {
 		
 		// обнуление переменных
 		$this->select = '*';
-		$this->orderBy = 'DESC';
-		$this->from = $this->where = $this->limit = null;
+		$this->orderBy = $this->from = $this->where = $this->limit = null;
 		
 		$this->sql = $sql;
 		$this->sqlForCount = $sqlForCount;
