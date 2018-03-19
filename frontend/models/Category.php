@@ -47,5 +47,30 @@ class Category {
 		return $result;
 	}
 	
+	// выдает все
+	public function selectCategories($id_good)
+	{
+		// нам нужно найти все категории товара
+		$modelCatGood = new CategoryGood();
+		
+		$result = $modelCatGood->selectIdCategories($id_good);
+		
+		// если false то выдаем пустой массив
+		if(!$result) return [];
+	
+		// строка для конструкции IN ( ... )
+		$in = implode(", ", $result);
+		
+		Catalog::$app->db->sqlBuilder()
+			->select('id, name')
+			->from($this->tableName)
+			->where('id IN ('.$in.')')
+			->limitPagination()
+			->forSelect();
+		
+		$categories = Catalog::$app->db->select();
+		
+		return $categories;
+	}
 	
 }
