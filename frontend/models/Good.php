@@ -30,6 +30,11 @@ class Good {
 		
 		$arrGoods = Catalog::$app->db->select();
 		
+		// необходимо для пагинации
+		$counts = Catalog::$app->db->selectOne(Catalog::$app->db->sqlBuilder()->sqlForCount());
+		// сохраняем количество строк в свойство
+		Catalog::$app->settings = ['counts', $counts['rows'] ];
+		
 		return $arrGoods;
 		
 		//print_r($arrGoods); die;
