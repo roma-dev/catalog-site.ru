@@ -22,9 +22,15 @@ class GoodController {
 		return Catalog::$app->view->render('goods', ['id'=> $id, 'page' => $page]);
 	}
 	
-	public function view($id, $page)
+	public function view($id)
 	{
-		return Catalog::$app->view->render('view', ['id'=> $id, 'page' => $page]);
+		$model = new Good();
+		
+		$result = $model->selectGood($id);
+		
+		if(!$result) Catalog::$app->httpHeader->error(404,'Такого товара не существует!');
+		
+		return Catalog::$app->view->render('view', ['id'=> $id, 'good' => $result]);
 	}
 	
 	public function update($id)
